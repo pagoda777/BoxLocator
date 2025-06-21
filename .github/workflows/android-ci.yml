@@ -11,18 +11,28 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v3
+      - name: Checkout code
+        uses: actions/checkout@v3
+
       - name: Set up JDK 11
         uses: actions/setup-java@v3
         with:
-          distribution: 'temurin'
+          distribution: temurin
           java-version: '11'
-      - name: Grant execute permission for gradlew
-        run: chmod +x gradlew
+
+      - name: Make gradlew executable
+        run: chmod +x ./gradlew
+
       - name: Build Debug APK
-        run: ./gradlew assembleDebug
-      - - name: Upload APK
-  uses: actions/upload-artifact@v4
-  with:
-    name: BoxLocator-apk
-    path: app/build/outputs/apk/debug/app-debug.apk
+        run: |
+          ./gradlew assembleDebug \
+            --warning-mode all \
+            --info \
+            --stacktrace
+
+      - name: Upload APK
+        uses: actions/upload-artifact@v4
+        with:
+          name: BoxLocator-apk
+          path: app/build/outputs/apk/debug/app-debug.apk
+
