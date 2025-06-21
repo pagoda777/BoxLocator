@@ -23,6 +23,7 @@ jobs:
       - name: Build Debug APK
         uses: gradle/gradle-build-action@v2
         with:
+          gradle-version: '7.5.1'
           arguments: assembleDebug --warning-mode all --info --stacktrace
 
       - name: Upload APK
