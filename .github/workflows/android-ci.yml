@@ -20,15 +20,10 @@ jobs:
           distribution: temurin
           java-version: '11'
 
-      - name: Make gradlew executable
-        run: chmod +x ./gradlew
-
       - name: Build Debug APK
-        run: |
-          ./gradlew assembleDebug \
-            --warning-mode all \
-            --info \
-            --stacktrace
+        uses: gradle/gradle-build-action@v2
+        with:
+          arguments: assembleDebug --warning-mode all --info --stacktrace
 
       - name: Upload APK
         uses: actions/upload-artifact@v4
