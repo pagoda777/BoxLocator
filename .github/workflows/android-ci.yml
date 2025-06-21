@@ -24,11 +24,13 @@ jobs:
         uses: gradle/gradle-build-action@v2
         with:
           gradle-version: '7.5.1'
-          arguments: assembleDebug --warning-mode all --info --stacktrace
+          arguments: ':app:assembleDebug --warning-mode all --info --stacktrace'
 
       - name: Upload APK
         uses: actions/upload-artifact@v4
         with:
           name: BoxLocator-apk
           path: app/build/outputs/apk/debug/app-debug.apk
+
+
 
